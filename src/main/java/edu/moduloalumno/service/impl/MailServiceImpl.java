@@ -106,7 +106,7 @@ public class MailServiceImpl implements IMailService {
 //			        mail.setText(cuerpoAEnviar,true);
 //			        javaMailSender.send(mimeMessage);
 //				}
-				String[] correos= {cuenta.getCoe_alumno(),cuenta.getCoe_alu_personal(),"tucorreo@unmsm.edu.pe"};
+				String[] correos= {cuenta.getCoe_alumno(),cuenta.getCoe_alu_personal(),"upg.fisi@unmsm.edu.pe"};
 			     
 				//envio al correo de upg fisi
 					mail.setFrom(email.getFrom());

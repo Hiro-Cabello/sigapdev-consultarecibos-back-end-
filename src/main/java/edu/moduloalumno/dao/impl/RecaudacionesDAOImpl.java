@@ -385,7 +385,7 @@ public class RecaudacionesDAOImpl implements IRecaudacionesDAO {
 				"				  on(a.cod_alumno=nd.cod_alumno and nd.l_ultimo='S')       " + 
 				"				  where        " + 
 				"				  	a.cna is null       " + 
-				"				  and substring(a.anio_ingreso,1,4) between ' "+fechaInicial+"' and '"+fechaFinal+"' " + 
+				"				  and substring(a.anio_ingreso,1,4) between '"+fechaInicial+"' and '"+fechaFinal+"' " + 
 				"				  and c.moneda='108'       " + 
 				"				  and i.importe>0.0 and (i.importe - c.importe_pagado) > 10       " + 
 				"				  and ((select sum(importe) from importe_alumno where cod_alumno=a.cod_alumno)-       " + 
@@ -423,7 +423,7 @@ public class RecaudacionesDAOImpl implements IRecaudacionesDAO {
 				"				  from recaudaciones c       " + 
 				"				  where c.cod_alumno=a.cod_alumno       " + 
 				"				  and c.id_concepto=i.cod_concepto)        " + 
-				"				  order by 8 desc,6,3,4,14;" ;
+				"				  order by 8 desc,6,3,4,14 " ;
 		
 		System.out.println("El sql es "+ sql);
 		

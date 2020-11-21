@@ -149,18 +149,12 @@ public class RecaudacionesJOINAlumnoJOINConceptoJOINFacultadController {
 			}
 			else {
 				for(RecaudacionesJOINAlumnoJOINConceptoJOINFacultad r:list) {
-					if(r.getMoneda().equals("113")) {
-					//	logger.info(" XX "+( (float) r.getImporte() ));
-					//	logger.info(" XyX "+ floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());
-						
-						r.setImporte_tc(( (float) r.getImporte() )*floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());
-					//r.setImporte_tc(( (float) r.getImporte() )*0);
-						//r.setImporte_tc(floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());
-					//	logger.info("importe "+r.getImporte_tc());
+					/*if(r.getMoneda().equals("113")) {											
+						r.setImporte_tc(( (float) r.getImporte() )*floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());					
 					}
-					else {
+					else {*/
 						r.setImporte_tc(( (float) r.getImporte() )*1);
-					}
+					//}
 					
 					r.setImporte_tc(floatformat.round(r.getImporte_tc(), 2));
 				}
@@ -192,12 +186,12 @@ public class RecaudacionesJOINAlumnoJOINConceptoJOINFacultadController {
 			}
 			else {
 				for(RecaudacionesAlumnoConConcepto r:list) {
-					if(r.getMoneda().equals("113")) {
+					/*if(r.getMoneda().equals("113")) {
 						r.setImporte_tc(( (float) r.getImporte() )*floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());					
 					}
-					else {
+					else {*/
 						r.setImporte_tc(( (float) r.getImporte() )*1);
-					}
+					//}
 					
 					r.setImporte_tc(floatformat.round(r.getImporte_tc(), 2));
 				}
@@ -211,46 +205,7 @@ public class RecaudacionesJOINAlumnoJOINConceptoJOINFacultadController {
 		logger.info("< getRecaudacionesJOINAlumnoJOINConceptoJOINFacultadByValidados [Recaudaciones]");
 		return new ResponseEntity<List<RecaudacionesAlumnoConConcepto>>(list, HttpStatus.OK);
 	}
-
-  	/*
-  	public PruebaTCambio dolares_a_soles(Date fecha) throws MalformedURLException {
-  		PruebaTCambio p= null;
-		URL url = new URL("https://api.sunat.cloud/cambio/"+fecha);
-		ObjectMapper mapper = new ObjectMapper();
-
-		try {
-			
-	        BufferedReader in = new BufferedReader(
-	        new InputStreamReader(url.openStream()));
-
-	        String inputLine="",lineafinal="";
-	        int campos=0;
-	        while ((inputLine = in.readLine()) != null) {
-	        	if(campos == 2 || campos == 3)
-	        			lineafinal+=inputLine;
-	         campos++;
-	        }
-	        
-	        lineafinal="{"+lineafinal+"}";
-	        
-	        logger.info("cuerpo "+lineafinal.trim());
-	        
-	        Reader reader = new StringReader(lineafinal.trim());
-	        p = mapper.readValue(reader, PruebaTCambio.class);
-			
-			logger.info("> objeto "+p);
-			if(p.getCompra() == 0.0) {
-				p.setCompra(1);
-			}
-			logger.info("> objeto "+p);
-			in.close();
-		
-		} catch (IOException e){
-			System.out.println("ERROR! USUARIOS NO GUARDADOS : " + e.getMessage());
-		}
-	
-		return p; 
-  	}*/
+  	
         
 /**/    @RequestMapping(value = "/listar_codigos/{nomApe}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CodigosporNomApe>> getCodigosByNombre(@PathVariable("nomApe") String nomApe) {

@@ -2,8 +2,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: tucorreo@unmsm.edu.pe
-    password: tuclave
+    username: TUCORREO
+    password: TUCLAVE
     
     
     properties:
@@ -18,6 +18,19 @@ spring:
     url: jdbc:postgresql://67.205.143.180/tcs7
     username: modulo4
     password: modulo4
+  jpa:
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  banner:
+      location: classpath:/example/banner.txt
+  mvc:
+    contentnegotiation:
+      media-types:
+        xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  output:
+    ansi:
+      enabled: always    
 
 server:
    port: 8080
@@ -26,12 +39,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: https://modulo-alumno-eureka.herokuapp.com/eureka #http://localhost:8761/eureka/
+    register-with-eureka: false
+    fetch-registry: false                               
   instance:
     hostname: localhost
     nonSecurePort: 8080
 
-banner:
-  location: classpath:/example/banner.txt
- 
-spring.mvc.contentnegotiation.media-types.xlsx : application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
 

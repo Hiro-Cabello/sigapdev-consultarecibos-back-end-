@@ -36,10 +36,12 @@ public class FloatFormat {
 	// tipo de cambio api sunat
 	public PruebaTCambio dolares_a_soles(String fecha) throws MalformedURLException, ParseException {
 
-		logger.info("fuck "+fecha);
+		logger.info("api.sunat "+fecha);
 		
   		PruebaTCambio p= null;		
   		URL url = new URL("https://api.sunat.cloud/cambio/"+fecha);
+  		//URL url = new URL("https://api.sunat.cloud/cambio/2014-07-09");
+  		
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {				
@@ -55,7 +57,7 @@ public class FloatFormat {
 	         campos++;
 	        }
 	        
-	        lineafinal="{"+lineafinal+"}";
+	       lineafinal="{"+lineafinal+"}";
 	        
 	        logger.info("cuerpo "+lineafinal.trim());
 	        

@@ -154,6 +154,8 @@ public class RecaudacionesJOINAlumnoJOINConceptoJOINFacultadController {
 					//	logger.info(" XyX "+ floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());
 						
 						r.setImporte_tc(( (float) r.getImporte() )*floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());
+					//r.setImporte_tc(( (float) r.getImporte() )*0);
+						//r.setImporte_tc(floatformat.dolares_a_soles(r.getFecha().toString()).getCompra());
 					//	logger.info("importe "+r.getImporte_tc());
 					}
 					else {

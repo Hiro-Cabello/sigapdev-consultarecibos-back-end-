@@ -15,11 +15,13 @@ import edu.moduloalumno.dao.IAlumnoProgramaJOINProgramaJOINAlumnoDAO;
 import edu.moduloalumno.entity.AlumnoProgramaJOINProgramaJOINAlumno;
 import edu.moduloalumno.entity.AlumnoSemestre;
 import edu.moduloalumno.entity.Presupuesto;
+import edu.moduloalumno.entity.Presupuesto2;
 import edu.moduloalumno.entity.Programa;
 import edu.moduloalumno.entity.Semestre;
 import edu.moduloalumno.rowmapper.AlumnoProgramaJOINProgramaJOINAlumnoRowMapper;
 import edu.moduloalumno.rowmapper.AlumnoProgramaJOINProgramaRowMapper;
 import edu.moduloalumno.rowmapper.AlumnoSemestreRowMapper;
+import edu.moduloalumno.rowmapper.Presupuesto2RowMapper;
 import edu.moduloalumno.rowmapper.PresupuestoRowMapper;
 import edu.moduloalumno.rowmapper.ProgramaRowMapper;
 import edu.moduloalumno.rowmapper.SemestreRowMapper;
@@ -101,6 +103,34 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoDAOImpl implements IAlumnoProgr
 		String sql = "select id_programa_presupuesto,id_programa,costo_credito,costo_total from programa_presupuesto where id_programa=?";
 		RowMapper<Presupuesto> rowMapper = new PresupuestoRowMapper();
 		List<Presupuesto> presupuesto = jdbcTemplate.query(sql, rowMapper,id_programa);
+		return presupuesto;
+		}
+		catch (EmptyResultDataAccessException e) {
+			return null;
+		}			
+	}
+	
+	@Override
+	public List<Presupuesto2> getPresupuesto2(Integer id_programa) {
+		try {
+		String sql = "select pp.id_programa_presupuesto,p.sigla_programa,pp.cod_plan,"
+				+ "CASE "
+				+ "WHEN pp.id_tipo_presupuesto=1 THEN '1-CREDITO' "
+				+ "ELSE"
+				+ "'2-CICLO' "
+				+ "END AS id_tipo_presupuesto,pp.n_creditos,m.moneda, "
+				+ "fn_getcostoprograma(pp.id_programa_presupuesto,9) as costo_mupg, "
+				+ "fn_getcostoprograma(pp.id_programa_presupuesto,117) as costo_mepg, "
+				+ "pp.costo_ciclo,pp.costo_credito,pp.costo_total "
+				+ "from "
+				+ "programa_presupuesto pp "
+				+ "inner join moneda m on (pp.id_moneda=m.id_moneda) "
+				+ "inner join programa p on (pp.id_programa=p.id_programa) "
+				+ "where "
+				+ "pp.id_programa=? "
+				+ "order by 3 desc,4;";
+		RowMapper<Presupuesto2> rowMapper = new Presupuesto2RowMapper();
+		List<Presupuesto2> presupuesto = jdbcTemplate.query(sql, rowMapper,id_programa);
 		return presupuesto;
 		}
 		catch (EmptyResultDataAccessException e) {

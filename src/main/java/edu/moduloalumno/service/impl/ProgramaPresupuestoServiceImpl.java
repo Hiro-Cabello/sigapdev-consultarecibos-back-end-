@@ -20,5 +20,10 @@ public class ProgramaPresupuestoServiceImpl implements IProgramaPresupuestoServi
 		
 		return programaPresupuestoDao.listarPrograma(codigo);
 	}
+	
+	@Override
+	public List<ProgramaPresupuesto> listarProgramaPresupuesto(Integer codigo) {
+		return programaPresupuestoDao.listarProgramaPresupuesto(codigo);
+	}
 
 }

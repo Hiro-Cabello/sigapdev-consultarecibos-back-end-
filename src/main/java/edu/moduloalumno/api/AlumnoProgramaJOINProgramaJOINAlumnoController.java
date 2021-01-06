@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.moduloalumno.entity.AlumnoProgramaJOINProgramaJOINAlumno;
 import edu.moduloalumno.entity.AlumnoSemestre;
 import edu.moduloalumno.entity.Presupuesto;
+import edu.moduloalumno.entity.Presupuesto2;
 import edu.moduloalumno.entity.Programa;
 import edu.moduloalumno.entity.Semestre;
 import edu.moduloalumno.service.IAlumnoProgramaJOINProgramaJOINAlumnoService;
@@ -117,6 +118,27 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoController {
 
 		logger.info("< getAlumnoProgramasIdByNombresApellidosRestringido [AlumnoPrograma]");
 		return new ResponseEntity<List<Presupuesto>>(presupuesto, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/presupuesto2/{id_programa}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Presupuesto2>> getPresupuesto2(@PathVariable("id_programa") int id_programa) {
+		logger.info("> getAlumnoProgramas [Presupuesto]");
+
+		List<Presupuesto2> presupuesto = null;
+		try {
+			presupuesto = service.getPresupuesto2(id_programa);
+
+			if (presupuesto == null) {	
+				presupuesto = new ArrayList<Presupuesto2>();
+			}
+			
+		} catch (Exception e) {
+			logger.error("Unexpected Exception caught.", e);
+			return new ResponseEntity<List<Presupuesto2>>(presupuesto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		logger.info("< getAlumnoProgramasIdByNombresApellidosRestringido [AlumnoPrograma]");
+		return new ResponseEntity<List<Presupuesto2>>(presupuesto, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/programas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

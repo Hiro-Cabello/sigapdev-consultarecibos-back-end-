@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import edu.moduloalumno.entity.Presupuesto;
 import edu.moduloalumno.entity.ProgramaPresupuesto;
 
 public class ProgramaPresupuestoRowMapper implements RowMapper<ProgramaPresupuesto> {

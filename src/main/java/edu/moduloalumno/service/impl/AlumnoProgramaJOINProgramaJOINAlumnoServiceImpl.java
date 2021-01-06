@@ -9,6 +9,7 @@ import edu.moduloalumno.dao.IAlumnoProgramaJOINProgramaJOINAlumnoDAO;
 import edu.moduloalumno.entity.AlumnoProgramaJOINProgramaJOINAlumno;
 import edu.moduloalumno.entity.AlumnoSemestre;
 import edu.moduloalumno.entity.Presupuesto;
+import edu.moduloalumno.entity.Presupuesto2;
 import edu.moduloalumno.entity.Programa;
 import edu.moduloalumno.entity.Semestre;
 import edu.moduloalumno.service.IAlumnoProgramaJOINProgramaJOINAlumnoService;
@@ -46,6 +47,12 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoServiceImpl implements IAlumnoP
 	@Override
 	public List<Presupuesto> getPresupuesto(Integer id_programa) {
 		List<Presupuesto> presupuesto = alumnoAlumnoProgramaDAO.getPresupuesto(id_programa);
+		return presupuesto;
+	}
+	
+	@Override
+	public List<Presupuesto2> getPresupuesto2(Integer id_programa) {
+		List<Presupuesto2> presupuesto = alumnoAlumnoProgramaDAO.getPresupuesto2(id_programa);
 		return presupuesto;
 	}
 	

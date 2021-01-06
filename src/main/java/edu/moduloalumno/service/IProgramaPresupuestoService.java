@@ -7,4 +7,5 @@ import edu.moduloalumno.entity.ProgramaPresupuesto;
 public interface IProgramaPresupuestoService {
 
 	 public List<ProgramaPresupuesto> listarPrograma(String codigo);
+	 public List<ProgramaPresupuesto> listarProgramaPresupuesto(Integer codigo);
 }

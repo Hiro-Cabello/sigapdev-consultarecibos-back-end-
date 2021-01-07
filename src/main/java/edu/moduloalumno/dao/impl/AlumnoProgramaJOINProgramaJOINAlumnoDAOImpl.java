@@ -153,7 +153,7 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoDAOImpl implements IAlumnoProgr
 	public List<AlumnoSemestre> getAlumnoSemestre(Integer semestre, String periodoinicial,String periodofinal) {
 		try {
 			logger.info(periodoinicial.substring(0, 4)+" "+periodofinal.substring(0, 4));
-		String sql = "select distinct (nom_alumno || ' ' || ape_paterno || ' ' || ape_materno) as nombre_completo,"
+		String sql = "select distinct (ape_paterno || '|' || ape_materno || '|' || nom_alumno) as nombre_completo,"
 				+ "	id_programa_presupuesto as presupuesto, cod_alumno, anio_ingreso as semestre from alumno_programa"
 				+ " where (id_programa= ?) and (CAST(substring(NULLIF(anio_ingreso,'0'),1,4) AS integer)  between ? and ?)";
 				

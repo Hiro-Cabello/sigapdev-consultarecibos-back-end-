@@ -155,10 +155,10 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoDAOImpl implements IAlumnoProgr
 			logger.info(periodoinicial.substring(0, 4)+" "+periodofinal.substring(0, 4));
 		String sql = "select distinct (ape_paterno || '|' || ape_materno || '|' || nom_alumno) as nombre_completo,"
 				+ "	id_programa_presupuesto as presupuesto, cod_alumno, anio_ingreso as semestre from alumno_programa"
-				+ " where (id_programa= ?) and (CAST(substring(NULLIF(anio_ingreso,'0'),1,4) AS integer)  between ? and ?)";
+				+ " where (id_programa= ?) and (CAST(substring(NULLIF(anio_ingreso,'0'),1,4) AS integer)  between ? and ?) and (CAST(substring(NULLIF(anio_ingreso,'0'),6,7) AS integer) between ? and ?)";
 				
 		RowMapper<AlumnoSemestre> rowMapper = new AlumnoSemestreRowMapper();
-		List<AlumnoSemestre> alumnosemestre = jdbcTemplate.query(sql, rowMapper,semestre,Integer.parseInt(periodoinicial.substring(0, 4)),Integer.parseInt(periodofinal.substring(0, 4)));
+		List<AlumnoSemestre> alumnosemestre = jdbcTemplate.query(sql, rowMapper,semestre,Integer.parseInt(periodoinicial.substring(0, 4)),Integer.parseInt(periodofinal.substring(0, 4)),Integer.parseInt(periodofinal.substring(5, 6)),Integer.parseInt(periodofinal.substring(5, 6)));
 		return alumnosemestre;
 		}
 		catch (EmptyResultDataAccessException e) {

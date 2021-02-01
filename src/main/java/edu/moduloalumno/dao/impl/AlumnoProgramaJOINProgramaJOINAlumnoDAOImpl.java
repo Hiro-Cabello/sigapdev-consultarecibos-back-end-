@@ -153,6 +153,10 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoDAOImpl implements IAlumnoProgr
 	public List<AlumnoSemestre> getAlumnoSemestre(Integer semestre, String periodoinicial,String periodofinal) {
 		try {
 			logger.info(periodoinicial.substring(0, 4)+" "+periodofinal.substring(0, 4));
+		String sql = 
+				"select distinct (ape_paterno || '|' || ape_materno || '|' || nom_alumno) as nombre_completo, id_programa_presupuesto as presupuesto, cod_alumno, anio_ingreso as semestre from alumno_programa " + 
+				"where (id_programa=?) and (anio_ingreso is not null)  AND (CAST(substring(anio_ingreso,1,4) AS integer) between ? and ?) and substring(anio_ingreso,6,7)!='' AND (CAST(substring(anio_ingreso,6,7) AS integer) between ? and ?);";
+		
 		String wel = "select distinct (ape_paterno || '|' || ape_materno || '|' || nom_alumno) as nombre_completo, " + 
 				"id_programa_presupuesto as presupuesto, cod_alumno, anio_ingreso as semestre from alumno_programa " + 
 				"where (id_programa=?) and ((anio_ingreso is not null) AND (((CAST(substring(anio_ingreso,1,4) AS integer) between ? and ?) and substring(anio_ingreso,6,7)!='' AND (CAST(substring(anio_ingreso,6,7) AS integer))>=?) " + 
@@ -163,7 +167,13 @@ public class AlumnoProgramaJOINProgramaJOINAlumnoDAOImpl implements IAlumnoProgr
 		Integer year2 = Integer.parseInt(periodofinal.substring(0, 4));
 		Integer smt1 = Integer.parseInt(periodoinicial.substring(5, 6));
 		Integer smt2 = Integer.parseInt(periodofinal.substring(5, 6));
-		List<AlumnoSemestre> alumnosemestre = jdbcTemplate.query(wel, rowMapper,semestre,year1,year1,smt1,year2,year2,smt2,year1+1,year2-1);
+		List<AlumnoSemestre> alumnosemestre;
+		if (year1.equals(year2)) {
+			alumnosemestre = jdbcTemplate.query(sql, rowMapper,semestre,year1,year1,smt1,smt2);
+		}
+		else{
+			alumnosemestre = jdbcTemplate.query(wel, rowMapper,semestre,year1,year1,smt1,year2,year2,smt2,year1+1,year2-1);
+		}
 		return alumnosemestre;
 		}
 		catch (EmptyResultDataAccessException e) {
